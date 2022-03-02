@@ -11,11 +11,9 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(const HomeState());
 
   void makeConfirm(ActionSliderController controller) async {
-    emit(state.copyWith(isLoading: true));
     controller.loading();
     debugPrint('=====> loading');
     await Future.delayed(const Duration(seconds: 5));
-    emit(state.copyWith(isLoading: false));
     controller.success();
     debugPrint('=====> success');
     await Future.delayed(const Duration(seconds: 1));

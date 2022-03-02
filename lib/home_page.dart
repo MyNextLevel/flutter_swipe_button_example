@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'home_cubit.dart';
 import 'action_slider/action_slider.dart';
-import 'swipebuttonflutter.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,34 +15,20 @@ class HomePage extends StatelessWidget {
       create: (_) => cubit,
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) => Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ActionSlider.standard(
-                  sliderBehavior: SliderBehavior.stretch,
-                  width: MediaQuery.of(context).size.width,
-                  child: const Text('Slide to confirm'),
-                  backgroundColor: Colors.grey,
-                  toggleColor: Colors.yellow,
-                  icon: SvgPicture.asset('assets/arrow_right.svg'),
-                  onSlide: (controller) async {
-                    cubit.makeConfirm(controller);
-                    // controller.loading();
-                    // await Future.delayed(const Duration(seconds: 3));
-                    // controller.success();
-                    // await Future.delayed(const Duration(seconds: 1));
-                    // controller.reset();
-                  },
-                ),
-                const SizedBox(height: 100),
-                SwipingButton(
-                  text: 'Slide to confirm',
-                  isLoading: state.isLoading,
-                  onSwipeCallback: () {},
-                ),
-              ],
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child: ActionSlider.standard(
+                sliderBehavior: SliderBehavior.stretch,
+                width: MediaQuery.of(context).size.width,
+                child: const Text('Slide to confirm'),
+                backgroundColor: Colors.grey,
+                toggleColor: Colors.yellow,
+                icon: SvgPicture.asset('assets/arrow_right.svg'),
+                onSlide: (controller) async {
+                  cubit.makeConfirm(controller);
+                },
+              ),
             ),
           ),
         ),
